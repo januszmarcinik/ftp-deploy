@@ -1,22 +1,48 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const ftpDeploy = require("ftp-deploy");
 
-
-// most @actions toolkit packages have async methods
 async function run() {
-  try { 
-    const ms = core.getInput('milliseconds');
-    console.log(`Waiting ${ms} milliseconds ...`)
+  try {
+    const server = core.getInput('server');
+    const user = core.getInput('user');
+    const password = core.getInput('password');
+    const localRoot = core.getInput('localRoot');
 
-    core.debug((new Date()).toTimeString())
-    await wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
+    const config = getConfig(server, user, password, localRoot);
 
-    core.setOutput('time', new Date().toTimeString());
-  } 
+    const ftp = new ftpDeploy();
+
+    console.log(`Executing FTP deploy to server ${server} ...`);
+
+    ftp.deploy(config)
+        .then(result => {
+          console.log('FTP deploy finished successfully with result: ', result);
+          core.setOutput('result', true);
+        })
+        .catch(error => {
+          console.log('FTP deploy failed with error: ', error);
+          core.setFailed(error);
+        });
+  }
   catch (error) {
+    console.log('Action failed with error: ', error);
     core.setFailed(error.message);
   }
 }
 
-run()
+run();
+
+function getConfig(server, user, password, localRoot) {
+  return {
+    user: user,
+    password: password,
+    host: server,
+    port: 21,
+    localRoot: localRoot,
+    remoteRoot: "/",
+    include: ["*"],
+    exclude: [],
+    deleteRemote: true,
+    forcePasv: true
+  };
+}
