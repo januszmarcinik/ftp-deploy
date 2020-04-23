@@ -9,6 +9,7 @@ async function run() {
     const localRoot = core.getInput('localRoot');
 
     const config = getConfig(server, user, password, localRoot);
+    console.log("config", config);
 
     const ftp = new ftpDeploy();
 
