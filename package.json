@@ -1,7 +1,7 @@
 {
-  "name": "javascript-action",
+  "name": "ftp-deploy",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "description": "GitHub action - FTP deploy",
   "main": "index.js",
   "scripts": {
     "lint": "eslint index.js",
@@ -10,21 +10,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/januszmarcinik/ftp-deploy.git"
   },
   "keywords": [
     "GitHub",
     "Actions",
     "JavaScript"
   ],
-  "author": "GitHub",
+  "author": "Janusz Marcinik",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/januszmarcinik/ftp-deploy/issues"
   },
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/januszmarcinik/ftp-deploy",
   "dependencies": {
-    "@actions/core": "^1.1.1"
+    "@actions/core": "^1.1.1",
+    "ftp-deploy": "^2.3.7"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.20.5",
