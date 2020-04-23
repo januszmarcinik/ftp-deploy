@@ -9,15 +9,23 @@ async function run() {
     const localRoot = core.getInput('localRoot');
 
     const config = getConfig(server, user, password, localRoot);
-    console.log("config", config);
 
     const ftp = new ftpDeploy();
 
+    console.log(`Executing FTP deploy to server ${server} ...`);
+
     ftp.deploy(config)
-        .then(res => console.log("finished: ", res))
-        .catch(err => console.log(err));
+        .then(result => {
+          console.log('FTP deploy finished successfully with result: ', result);
+          core.setOutput('result', true);
+        })
+        .catch(error => {
+          console.log('FTP deploy failed with error: ', error);
+          core.setFailed(error);
+        });
   }
   catch (error) {
+    console.log('Action failed with error: ', error);
     core.setFailed(error.message);
   }
 }

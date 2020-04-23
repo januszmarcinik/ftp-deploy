@@ -1,13 +1,21 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'FTP Deploy'
+description: 'Deploy your build to any FTP server'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  server:
+    description: 'FTP server address, eg: 127.0.0.1'
     required: true
-    default: '1000'
+  user:
+    description: 'FTP user'
+    required: true
+  password:
+    description: 'FTP password'
+    required: true
+  localRoot:
+    description: 'Local root for source files that will be transferred to the destination, eg: "dist"'
+    required: true
 outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+  result:
+    description: 'Returns "true" when everything went well'
 runs:
   using: 'node12'
   main: 'dist/index.js'
