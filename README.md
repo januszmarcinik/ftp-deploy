@@ -6,7 +6,7 @@ Deploy your build to any FTP server.
 
 ``` yml
 - name: 'Deploy to UAT'
-  uses: januszmarcinik/ftp-deploy@test
+  uses: januszmarcinik/ftp-deploy@v1
   with:
     server: 127.0.0.1
     user: my-ftp-user

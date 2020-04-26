@@ -1,5 +1,6 @@
-name: 'FTP Deploy'
+name: 'Deploy app by FTP'
 description: 'Deploy your build to any FTP server'
+author: 'Janusz Marcinik'
 inputs:
   server:
     description: 'FTP server address, eg: 127.0.0.1'
