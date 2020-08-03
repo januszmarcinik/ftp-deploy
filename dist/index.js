@@ -3103,8 +3103,9 @@ async function run() {
     const user = core.getInput('user');
     const password = core.getInput('password');
     const localRoot = core.getInput('localRoot');
+    const deleteRemote = core.getInput('deleteRemote');
 
-    const config = getConfig(server, user, password, localRoot);
+    const config = getConfig(server, user, password, localRoot, deleteRemote);
 
     const ftp = new ftpDeploy();
 
@@ -3128,7 +3129,7 @@ async function run() {
 
 run();
 
-function getConfig(server, user, password, localRoot) {
+function getConfig(server, user, password, localRoot, deleteRemote) {
   return {
     user: user,
     password: password,
@@ -3138,7 +3139,7 @@ function getConfig(server, user, password, localRoot) {
     remoteRoot: "/",
     include: ["*"],
     exclude: [],
-    deleteRemote: true,
+    deleteRemote: deleteRemote,
     forcePasv: true
   };
 }
